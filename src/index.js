@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import 'react-app-polyfill/ie11';
-import './index.css';
-import App from './App';
+import App from 'src/components/App';
 import * as serviceWorker from './serviceWorker';
+import './index.css';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 

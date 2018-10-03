@@ -1,6 +1,9 @@
 import React from 'react';
 import Autosuggest from 'react-autosuggest';
+import debounce from 'lodash/debounce';
+import Http from 'src/services/Http';
 import './Search.scss';
+
 
 // Imagine you have a list of languages that you'd like to autosuggest.
 const languages = [
@@ -64,6 +67,7 @@ const languages = [
 
 // Teach Autosuggest how to calculate suggestions for any given input value.
 const getSuggestions = value => {
+
   const inputValue = value.trim().toLowerCase();
   const inputLength = inputValue.length;
 
@@ -85,6 +89,7 @@ const renderSuggestion = suggestion => (
 );
 
 class Search extends React.Component {
+
   constructor() {
     super();
 
@@ -108,6 +113,7 @@ class Search extends React.Component {
   // Autosuggest will call this function every time you need to update suggestions.
   // You already implemented this logic above, so just use it.
   onSuggestionsFetchRequested = ({ value }) => {
+
     this.setState({
       suggestions: getSuggestions(value)
     });
@@ -119,6 +125,14 @@ class Search extends React.Component {
       suggestions: []
     });
   };
+
+  componentDidMount(){
+
+    const http = new Http();
+    http.get('/users/angular/repos')
+      .then((res) => console.log(res));
+
+  }
 
   render() {
     const { value, suggestions } = this.state;

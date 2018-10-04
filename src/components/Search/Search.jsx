@@ -1,7 +1,7 @@
 import React from 'react';
 import Autosuggest from 'react-autosuggest';
 import debounce from 'lodash/debounce';
-import Http from 'src/services/Http';
+import Repo from 'src/services/Repo';
 import './Search.scss';
 
 
@@ -90,21 +90,12 @@ const renderSuggestion = suggestion => (
 
 class Search extends React.Component {
 
-  constructor() {
-    super();
+  state = {
+    value: '',
+    suggestions: []
+  };
 
-    // Autosuggest is a controlled component.
-    // This means that you need to provide an input value
-    // and an onChange handler that updates this value (see below).
-    // Suggestions also need to be provided to the Autosuggest,
-    // and they are initially empty because the Autosuggest is closed.
-    this.state = {
-      value: '',
-      suggestions: []
-    };
-  }
-
-  onChange = (event, { newValue }) => {
+  onChange = ( event, { newValue } ) => {
     this.setState({
       value: newValue
     });
@@ -119,6 +110,12 @@ class Search extends React.Component {
     });
   };
 
+  fetchUsers = (user) => debounce((user) => {
+    const repo = new Repo();
+    repo.getUserRepoList(user)
+      .then(r => console.log(r));
+  });
+
   // Autosuggest will call this function every time you need to clear suggestions.
   onSuggestionsClearRequested = () => {
     this.setState({
@@ -128,10 +125,6 @@ class Search extends React.Component {
 
   componentDidMount(){
 
-    const http = new Http();
-    http.get('/users/angular/repos')
-      .then((res) => console.log(res));
-
   }
 
   render() {
@@ -139,7 +132,7 @@ class Search extends React.Component {
 
     // Autosuggest will pass through all these props to the input.
     const inputProps = {
-      placeholder: 'Type a programming language',
+      placeholder: 'Type a GitHub user name',
       value,
       onChange: this.onChange
     };

@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom';
 import 'react-app-polyfill/ie11';
 import App from 'src/components/App';
 import * as serviceWorker from './serviceWorker';
+import 'bootstrap/dist/css/bootstrap.css'
+import 'react-bootstrap-typeahead/css/Typeahead.css';
+import 'react-bootstrap-typeahead/css/Typeahead-bs4.css';
 import './index.css';
 
 ReactDOM.render(<App />, document.getElementById('root'));

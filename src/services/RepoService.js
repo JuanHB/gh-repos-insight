@@ -1,6 +1,6 @@
 import Http from './Http';
 
-class Repo {
+class RepoService {
 
   instance;
 
@@ -8,17 +8,15 @@ class Repo {
     if (this.instance) {
       return this.instance;
     }
-
     this.http = new Http();
-
     this.instance = this;
   }
 
-  getUserRepoList(user) {
+  getUserRepos(user) {
     return this.http.get(`/users/${user}/repos`)
       .then(res => res.data);
   }
 
 }
 
-export default Repo;
+export default RepoService;

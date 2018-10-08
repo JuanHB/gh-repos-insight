@@ -3,7 +3,7 @@
 Basic stats about a repo from a user, 
 the data shows the contributions for each user on the selected repo.
 
-###To install and run
+### To install and run
 
 `npm install`
 

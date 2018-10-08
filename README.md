@@ -20,7 +20,7 @@ Simple as that, everything was bootstraped using Create React App 2.0.
 * Create React App 2.0
 * Axios
 * Semantic HTML, SCSS
- 
+* Bootstrap 3 CSS
 
 
 
